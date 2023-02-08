@@ -43,6 +43,16 @@ class MoviesController < ApplicationController
         @movies = Movie.where("title LIKE ? OR director LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
       end
   
+      def rate
+        @movie = Movie.find(params[:id])
+        @rating = @movie.ratings.new(score: params[:score])
+        if @rating.save
+          redirect_to @movie, notice: 'Movie was successfully rated.'
+        else
+          redirect_to @movie, alert: 'Rating failed.'
+        end
+      end
+
     private
       def movie_params
         params.require(:movie).permit(:title, :director, :release_year)

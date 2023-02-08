@@ -1,0 +1,21 @@
+<h1>Listing Ratings for <%= @movie.title %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Score</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ratings.each do |rating| %>
+      <tr>
+        <td><%= rating.score %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back to movie', @movie %>
