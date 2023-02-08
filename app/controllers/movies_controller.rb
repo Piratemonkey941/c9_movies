@@ -38,6 +38,10 @@ class MoviesController < ApplicationController
       @movie.destroy
       redirect_to movies_url, notice: 'Movie was successfully destroyed.'
     end
+
+    def search
+        @movies = Movie.where("title LIKE ? OR director LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+      end
   
     private
       def movie_params
